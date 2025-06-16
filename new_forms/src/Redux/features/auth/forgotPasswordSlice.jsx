@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "../../Helper/axiosInterceptors";
-import API_PATHS from "../../Service/apiPath";
+import axiosInstance from "../../../../src/Helper/axiosInterceptors";
+import API_PATHS from "../../../../src/Service/apiPath";
 
 export const forgotPassword = createAsyncThunk(
   "forgot/forgotPassword",
@@ -33,7 +33,7 @@ const forgotPasswordSlice = createSlice({
         state.message = null;
         state.error = null;
       })
-      .addCase(forgotPassword.fulfilled, (state, action) => {
+      .addCase(forgotPassword.fulfilled, (state) => {
         state.loading = false;
         state.message = "Reset password link sent to your email.";
       })

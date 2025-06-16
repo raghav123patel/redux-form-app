@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "../../Helper/axiosInterceptors";
-import API_PATHS from "../../Service/apiPath";
+import axiosInstance from "../../../../src/Helper/axiosInterceptors";
+import API_PATHS from "../../../../src/Service/apiPath";
 
 export const registerUser = createAsyncThunk(
   "register/registerUser",

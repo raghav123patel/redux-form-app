@@ -1,40 +1,99 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import userService from "../../Service/userService";
+import { useDispatch } from "react-redux";
+import { deleteUser } from "../../Redux/features/users/userDeleteSlice";
+import { fetchUsers } from "../../Redux/features/users/userListSlice";
 
-function UserDelete() {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const [user, setUser] = useState(null);
+function UserDeleteButton({ userId }) {
+  const dispatch = useDispatch();
 
-  const deleteUser = async () => {
-    try {
-      const deletedUser = await userService.deleteUserById(id);
-      setUser(deletedUser);
-    } catch (error) {
-      console.error("Error deleting user:", error);
-      navigate("/list");
+  const handleDelete = () => {
+    if (window.confirm("Are you sure to delete?")) {
+      dispatch(deleteUser(userId)).then(() => dispatch(fetchUsers()));
     }
   };
 
-  useEffect(() => {
-    deleteUser();
-  }, [id]);
-
-  return (
-    <>
-      <h1>User Deleted Successfully</h1>
-      {user ? (
-        <>
-          <h4>ID: {user._id}</h4>
-          <h4>Name: {user.name}</h4>
-          <h4>Email: {user.email}</h4>
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </>
-  );
+  return <button onClick={handleDelete}>Delete</button>;
 }
 
-export default UserDelete;
+export default UserDeleteButton;
+
+// import { useState, useEffect } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+// import userService from "../../Service/userService";
+
+// function UserDelete() {
+//   const navigate = useNavigate();
+//   const { id } = useParams();
+//   const [user, setUser] = useState(null);
+
+//   const deleteUser = async () => {
+//     try {
+//       const deletedUser = await userService.deleteUserById(id);
+//       setUser(deletedUser);
+//     } catch (error) {
+//       console.error("Error deleting user:", error);
+//       navigate("/list");
+//     }
+//   };
+
+//   useEffect(() => {
+//     deleteUser();
+//   }, [id]);
+
+//   return (
+//     <>
+//       <h1>User Deleted Successfully</h1>
+//       {user ? (
+//         <>
+//           <h4>ID: {user._id}</h4>
+//           <h4>Name: {user.name}</h4>
+//           <h4>Email: {user.email}</h4>
+//         </>
+//       ) : (
+//         <p>Loading...</p>
+//       )}
+//     </>
+//   );
+// }
+
+// export default UserDelete;
+
+// import { useState, useEffect } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+// import userService from "../../Service/userService";
+
+// function UserDelete() {
+//   const navigate = useNavigate();
+//   const { id } = useParams();
+//   const [user, setUser] = useState(null);
+
+//   const deleteUser = async () => {
+//     try {
+//       const deletedUser = await userService.deleteUserById(id);
+//       setUser(deletedUser);
+//     } catch (error) {
+//       console.error("Error deleting user:", error);
+//       navigate("/list");
+//     }
+//   };
+
+//   useEffect(() => {
+//     deleteUser();
+//   }, [id]);
+
+//   return (
+//     <>
+//       <h1>User Deleted Successfully</h1>
+//       {user ? (
+//         <>
+//           <h4>ID: {user._id}</h4>
+//           <h4>Name: {user.name}</h4>
+//           <h4>Email: {user.email}</h4>
+//         </>
+//       ) : (
+//         <p>Loading...</p>
+//       )}
+//     </>
+//   );
+// }
+
+// export default UserDelete;
