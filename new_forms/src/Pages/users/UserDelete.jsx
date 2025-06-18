@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteUser } from "../../Redux/features/users/userDeleteSlice";
 import { fetchUsers } from "../../Redux/features/users/userListSlice";
 
-function UserDeleteButton({ userId }) {
+function UserDelete({ userId }) {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
@@ -14,7 +14,7 @@ function UserDeleteButton({ userId }) {
   return <button onClick={handleDelete}>Delete</button>;
 }
 
-export default UserDeleteButton;
+export default UserDelete;
 
 // import { useState, useEffect } from "react";
 // import { useParams, useNavigate } from "react-router-dom";

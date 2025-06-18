@@ -8,12 +8,12 @@ const getUsers = async (pageNumber = 1, pageSize = 1000) => {
   return response.data.data;
 };
 
-const getUserById = async (id) => {
+export const getUserById = async (id) => {
   const response = await axiosInstance.get(`${API_PATHS.USER_LIST}/${id}`);
   return response.data.user;
 };
 
-const deleteUserById = async (id) => {
+export const deleteUserById = async (id) => {
   const response = await axiosInstance.delete(`${API_PATHS.USER_LIST}/${id}`);
   return response.data.user;
 };

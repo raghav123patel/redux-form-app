@@ -46,15 +46,7 @@ function UserUpdateForm() {
           />
         </label>
         <br />
-        <label>
-          Email:
-          <input
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
+    
         <br />
         <button type="submit" disabled={loading}>
           Update

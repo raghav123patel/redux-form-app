@@ -14,11 +14,11 @@ function UserList() {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      dispatch(deleteUser(id)).then(() => dispatch(fetchUsers()));
-    }
-  };
+  // const handleDelete = (id) => {
+  //   if (window.confirm("Are you sure you want to delete this user?")) {
+  //     dispatch(deleteUser(id)).then(() => dispatch(fetchUsers()));
+  //   }
+  // };
 
   return (
     <div>
@@ -28,7 +28,7 @@ function UserList() {
       <table border="1" cellPadding="10">
         <thead>
           <tr>
-            <th>S.No</th>
+            <th>S.No</th>8
             <th>Name</th>
             <th>Email</th>
             <th>Actions</th>
@@ -41,13 +41,13 @@ function UserList() {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                <button onClick={() => navigate(`/user/${user._id}`)}>
+                <button onClick={() => navigate(`/user/${user.id}`)}>
                   View
                 </button>
-                <button onClick={() => navigate(`/user/update/${user._id}`)}>
+                <button onClick={() => navigate(`/user/update/${user.id}`)}>
                   Update
                 </button>
-                <button onClick={() => handleDelete(user._id)}>Delete</button>
+                <button onClick={() => navigate(`/delete/${user.id}`)}>Delete</button>
               </td>
             </tr>
           ))}

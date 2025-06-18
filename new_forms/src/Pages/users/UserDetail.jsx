@@ -6,19 +6,19 @@ import { useParams, useNavigate } from "react-router-dom";
 function UserDetail() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams(); // Get the userId from URL
+  const { id } = useParams(); 
 
   const {
-    user = null,
+    user,
     loading,
     error,
   } = useSelector((state) => state.userDetail || {});
-
+  console.log(user,"",loading);
   useEffect(() => {
     if (id) {
       dispatch(fetchUserDetail(id));
     }
-  }, [dispatch, id]);
+  }, [ id]);
 
   if (loading) return <p>Loading user details...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;

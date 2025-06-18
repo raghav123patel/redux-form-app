@@ -1,15 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "../../../Helper/axiosInterceptors";
-import API_PATHS from "../../../Service/apiPath";
-
+import {deleteUserById} from "../../../Service/userService";
 export const deleteUser = createAsyncThunk(
   "users/deleteUser",
-  async (userId, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.delete(
-        `${API_PATHS.USER_DELETE}/${userId}`
-      );
-      return response; // return ID to remove from list
+      const response = await deleteUserById.delete(id);
+      console.log(response)
+      return response; 
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to delete user");
     }

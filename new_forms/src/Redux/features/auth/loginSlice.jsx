@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "../../../../src/Helper/axiosInterceptors";
-import API_PATHS from "../../../../src/Service/apiPath";
+import { login } from "../../../Service/authService";
+
 
 export const loginUser = createAsyncThunk(
   "login/loginUser",
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post(API_PATHS.LOGIN, credentials);
-      return response.data.data;
+      const response = await login(credentials);
+      console.log(response);
+      return response;
     } catch (error) {
+      console.log(error)
       return rejectWithValue(error.response?.data || "Login failed");
     }
   }
@@ -34,9 +36,10 @@ const loginSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        console.log(action);
         state.loading = false;
-        state.token = action.payload.token;
-        localStorage.setItem("token", action.payload.token);
+        state.token = action.token;
+        localStorage.setItem("token", action.token);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

@@ -1,15 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "../../../../src/Helper/axiosInterceptors";
-import API_PATHS from "../../../../src/Service/apiPath";
+import { register } from "../../../Service/authService";
 
-export const registerUser = createAsyncThunk(
+
+export const registeredUsers = createAsyncThunk(
   "register/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post(API_PATHS.REGISTER, userData);
-      return response.data.data;
+      const response = await register(userData);
+      console.log("API response in thunk:", response);
+      return response // Make sure your registerUser returns full axios response or data accordingly
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Registration failed");
+      console.error("Error in registerUser thunk:", error);
+
+   
     }
   }
 );
@@ -21,22 +24,29 @@ const registerSlice = createSlice({
     error: null,
     registrationData: null,
   },
-  reducers: {},
+  reducers: {
+    resetRegistration: (state) => {
+      state.loading = false;
+      state.error = null;
+      state.registrationData = null;
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(registerUser.pending, (state) => {
+      .addCase(registeredUsers.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(registeredUsers.fulfilled, (state, action) => {
         state.loading = false;
         state.registrationData = action.payload;
       })
-      .addCase(registerUser.rejected, (state, action) => {
+      .addCase(registeredUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
+export const { resetRegistration } = registerSlice.actions;
 export default registerSlice.reducer;
