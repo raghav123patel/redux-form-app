@@ -1,17 +1,29 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteUser } from "../../Redux/features/users/userDeleteSlice";
-import { fetchUsers } from "../../Redux/features/users/userListSlice";
+import { useParams } from "react-router-dom";
 
-function UserDelete({ userId }) {
+function UserDelete() {
   const dispatch = useDispatch();
+  const { id } = useParams();
 
-  const handleDelete = () => {
-    if (window.confirm("Are you sure to delete?")) {
-      dispatch(deleteUser(userId)).then(() => dispatch(fetchUsers()));
+  const { success, error } = useSelector((state) => state.userDelete || {});
+
+  useEffect(() => {
+    if (id) {
+      dispatch(deleteUser(id));
     }
-  };
+  }, [dispatch, id]);
 
-  return <button onClick={handleDelete}>Delete</button>;
+  if (error) {
+    return <p style={{ color: "red" }}>{error.message || String(error)}</p>;
+  }
+
+  if (success) {
+    return <p style={{ color: "green" }}>User deleted successfully!</p>;
+  }
+
+  return <p>Deleting user...</p>;
 }
 
 export default UserDelete;

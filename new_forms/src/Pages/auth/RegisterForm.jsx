@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registeredUsers } from "../../Redux/features/auth/registerSlice"; 
+import { registeredUsers } from "../../Redux/features/auth/registerSlice";
 import { useNavigate } from "react-router-dom";
 import "../../styles/authForm.css";
 
@@ -13,9 +13,7 @@ function RegisterForm() {
     password: "",
   });
 
-  const { loading, error} = useSelector(
-    (state) => state.register
-  );
+  const { loading, error } = useSelector((state) => state.register);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,10 +27,10 @@ function RegisterForm() {
     e.preventDefault();
     try {
       const result = await dispatch(registeredUsers(formData)).unwrap();
-      console.log( result);
-        const { emailVerificationTOken, id } = result;
+      console.log(result);
+      const { emailVerificationTOken, id } = result;
       if (emailVerificationTOken && id) {
-       navigate(`/verification/${emailVerificationTOken}/${id}`);
+        navigate(`/verification/${emailVerificationTOken}/${id}`);
       } else {
         alert("Registration successful, but verification info missing.");
       }
@@ -41,13 +39,11 @@ function RegisterForm() {
     }
   };
 
- 
-
   return (
     <div className="auth-container">
       <center>
         <h2>Register</h2>
-        <form onSubmit={handleSubmit}> 
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
@@ -75,7 +71,7 @@ function RegisterForm() {
             value={formData.password}
             onChange={handleChange}
             required
-          /> 
+          />
           <br />
           <br />
           <button type="submit" disabled={loading}>

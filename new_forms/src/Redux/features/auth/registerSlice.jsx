@@ -1,18 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { register } from "../../../Service/authService";
 
-
 export const registeredUsers = createAsyncThunk(
   "register/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
       const response = await register(userData);
       console.log("API response in thunk:", response);
-      return response // Make sure your registerUser returns full axios response or data accordingly
+      return response;
     } catch (error) {
-      console.error("Error in registerUser thunk:", error);
-
-   
+      console.log(error);
+      return rejectWithValue(error.response?.data || "registration failed");
     }
   }
 );
@@ -29,7 +27,7 @@ const registerSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.registrationData = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder

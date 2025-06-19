@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../Redux/features/users/userListSlice";
-import { deleteUser } from "../../Redux/features/users/userDeleteSlice";
 import { useNavigate } from "react-router-dom";
 
 function UserList() {
@@ -28,7 +27,7 @@ function UserList() {
       <table border="1" cellPadding="10">
         <thead>
           <tr>
-            <th>S.No</th>8
+            <th>S.No</th>
             <th>Name</th>
             <th>Email</th>
             <th>Actions</th>
@@ -47,7 +46,9 @@ function UserList() {
                 <button onClick={() => navigate(`/user/update/${user.id}`)}>
                   Update
                 </button>
-                <button onClick={() => navigate(`/delete/${user.id}`)}>Delete</button>
+                <button onClick={() => navigate(`/delete/${user.id}`)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

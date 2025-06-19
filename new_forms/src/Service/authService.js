@@ -1,17 +1,16 @@
-
 import axiosInstance from "../Helper/axiosInterceptors";
 import API_PATHS from "./apiPath";
 
 export const register = async (userData) => {
   const response = await axiosInstance.post(API_PATHS.REGISTER, userData);
   console.log(response);
-  return response.data.data; 
+  return response.data.data;
 };
 
-export const verifyEmail = async ({token, id}) => {
+export const verifyEmail = async ({ token, id }) => {
   console.log("heduyhuih");
-  
-  console.log(token,"",id)
+
+  console.log(token, "", id);
   const response = await axiosInstance.get(
     `${API_PATHS.VERIFY_EMAIL}?token=${token}&userId=${id}`
   );
@@ -19,8 +18,10 @@ export const verifyEmail = async ({token, id}) => {
   return response.data;
 };
 
-const forgotPassword = async (email) => {
-  const response = await axiosInstance.post(API_PATHS.FORGOT_PASSWORD, { email });
+export const forgotPassword = async (email) => {
+  const response = await axiosInstance.post(API_PATHS.FORGOT_PASSWORD, {
+    email,
+  });
   console.log(response);
   return response.data;
 };
@@ -46,8 +47,5 @@ export const login = async (credentials) => {
 };
 
 export default {
-  
-forgotPassword,
-resetPassword,
-
+  resetPassword,
 };

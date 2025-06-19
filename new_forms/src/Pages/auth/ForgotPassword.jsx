@@ -1,7 +1,6 @@
-// src/components/ForgotPasswordForm.jsx
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { forgotPassword } from "../../Redux/features/auth/forgotPasswordSlice";
+import { forgot } from "../../Redux/features/auth/forgotPasswordSlice";
 
 function ForgotPasswordForm() {
   const dispatch = useDispatch();
@@ -10,7 +9,7 @@ function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
 
   const handleSubmit = () => {
-    dispatch(forgotPassword({ email }));
+    dispatch(forgot({ email }));
   };
 
   return (

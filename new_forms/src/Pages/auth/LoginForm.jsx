@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Redux/features/auth/loginSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../../styles/authForm.css";
 
 function LoginForm() {
@@ -20,12 +20,10 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(credentials))
-    .then((res) => {
-   localStorage.setItem("token", res.payload.token)
-         navigate("/list");
-      }
-    );
+    dispatch(loginUser(credentials)).then((res) => {
+      localStorage.setItem("token", res.payload.token);
+      navigate("/list");
+    });
   };
 
   return (
@@ -46,6 +44,15 @@ function LoginForm() {
           value={credentials.password}
           onChange={handleChange}
         />
+        {/* ✅ Forgot Password link */}
+        <div style={{ textAlign: "right", marginBottom: "10px" }}>
+          <Link
+            to="/forgot-password"
+            style={{ fontSize: "14px", color: "#007bff" }}
+          >
+            Forgot Password?
+          </Link>
+        </div>
         <button type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>

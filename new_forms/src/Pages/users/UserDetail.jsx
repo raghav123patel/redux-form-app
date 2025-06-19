@@ -6,19 +6,17 @@ import { useParams, useNavigate } from "react-router-dom";
 function UserDetail() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams(); 
+  const { id } = useParams();
 
-  const {
-    user,
-    loading,
-    error,
-  } = useSelector((state) => state.userDetail || {});
-  console.log(user,"",loading);
+  const { user, loading, error } = useSelector(
+    (state) => state.userDetail || {}
+  );
+  console.log(user, "", loading);
   useEffect(() => {
     if (id) {
       dispatch(fetchUserDetail(id));
     }
-  }, [ id]);
+  }, [id]);
 
   if (loading) return <p>Loading user details...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -34,7 +32,7 @@ function UserDetail() {
         <strong>Email:</strong> {user.email}
       </p>
 
-      <button onClick={() => navigate("/userlist")}>Back to List</button>
+      <button onClick={() => navigate("/list")}>Back to List</button>
     </div>
   );
 }

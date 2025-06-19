@@ -14,7 +14,7 @@ const store = configureStore({
   reducer: {
     register: registerReducer,
     login: loginReducer,
-    forgotPassword: forgotPasswordReducer,
+    forgot: forgotPasswordReducer,
     resetPassword: resetPasswordReducer,
     verifyEmail: verifyEmailReducer,
 
