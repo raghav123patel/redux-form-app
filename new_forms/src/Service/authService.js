@@ -49,3 +49,15 @@ export const login = async (credentials) => {
 export default {
   resetPassword,
 };
+
+
+
+// export const registerUser = async(registrationData) => {
+//   try{
+//     const response = await axiosInstance.post(API_PATHS.REGISTER, registrationData);
+//     console.log(response);
+//     return response.data.data;
+//   } catch(error) {
+//     console.log("error in fetching the api")
+//   }
+// }

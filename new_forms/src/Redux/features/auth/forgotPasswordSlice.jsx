@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { forgotPassword } from "../../../Service/authService";
 
-// ✅ Async thunk for forgot password
+
 export const forgot = createAsyncThunk(
   "forgot/forgotPassword",
   async ({ email }, { rejectWithValue }) => {
     try {
-      const response = await forgotPassword(email); // ✅ await added
-      console.log("Forgot Password Response:", response.data);
-      return response.data; // ✅ return the actual message
+      const response = await forgotPassword(email); 
+      console.log("Forgot Password Response:", response);
+      return response; 
     } catch (error) {
       console.log(error);
       return rejectWithValue(
@@ -18,7 +18,7 @@ export const forgot = createAsyncThunk(
   }
 );
 
-// ✅ Slice setup
+
 const forgotPasswordSlice = createSlice({
   name: "forgot",
   initialState: {
@@ -37,13 +37,13 @@ const forgotPasswordSlice = createSlice({
       .addCase(forgot.fulfilled, (state, action) => {
         state.loading = false;
         state.message =
-          action.payload.message || "Reset password link sent to your email."; // ✅ use API message
+          action.payload.message || "Reset password link sent to your email."; 
         state.error = null;
       })
       .addCase(forgot.rejected, (state, action) => {
         state.loading = false;
         state.message = null;
-        state.error = action.payload?.message || "Something went wrong"; // ✅ show actual error
+        state.error = action.payload?.message || "Something went wrong"; 
       });
   },
 });

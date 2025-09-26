@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { forgot } from "../../Redux/features/auth/forgotPasswordSlice";
+import { useNavigate } from "react-router-dom";
 
 function ForgotPasswordForm() {
   const dispatch = useDispatch();
   const { loading, message, error } = useSelector((state) => state.forgot);
 
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
-    dispatch(forgot({ email }));
+    dispatch(forgot({ email })).then( ()=> navigate("/login"))
   };
 
   return (

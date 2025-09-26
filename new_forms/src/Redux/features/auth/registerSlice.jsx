@@ -48,3 +48,53 @@ const registerSlice = createSlice({
 
 export const { resetRegistration } = registerSlice.actions;
 export default registerSlice.reducer;
+
+
+// export const registeredUsersData = createAsyncThunk(
+//      "register/registerUser", 
+//      async(registrationData, {rejectWithValue}) => {
+//       try {
+//         const response = await registerUser(registrationData);
+//         console.log(response);
+//         return response;
+        
+//       } catch(error) {
+//         console.log(error);
+//         return rejectWithValue(error.response?.data, "registration failed");  
+//       }
+//      }
+// )
+
+// const registeSlice = createSlice({
+//   name: "register",
+//   initialState: {
+//     loading: false,
+//     error: null,
+//     registrationData: null,   
+//   },
+//   reducers: {
+//     resetRegistration: (state) => {
+//       state.loading = false;
+//       state.error = null;
+//       state.registrationData = action.paylaod; 
+//     },
+       
+    
+//   },
+//   extraReducers: (builder) => {
+//     builder
+//     .addCase(registeredUsersData.pending, (state) => {
+//       state.loading = true;
+//       state.error = null;
+//     })
+//     .addCase(registeredUsersData.pending, (state) => {
+//       state.loading = false;
+//       state.registrationData = action.payload;
+//     })
+
+
+
+
+//   }
+
+// })

@@ -26,6 +26,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     const { response } = error;
+    console.log(error)
     if (response.status === 401) {
       console.warn("Unauthorized access - maybe token expired.");
       localStorage.removeItem("token");    
